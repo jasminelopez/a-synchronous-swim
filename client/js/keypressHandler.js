@@ -7,9 +7,4 @@ $('body').on('keydown', (event) => {
   }
 });
 
-//Make a random move -GY
-const generateRandomMove = function () {
-  return 'up';
-}
-
 console.log('Client is running in the browser!');

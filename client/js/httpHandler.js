@@ -8,15 +8,14 @@
   const ajaxGetRequest = () => { 
     $.ajax({
       type: 'GET',
-      data: '',
-      url: serverUrl, //needs to be somethign
+      url: serverUrl,
       cache: false,
       contentType: 'text/plain',
-      processData: false,
-      success: () => { // return random comand??
-        // reload the page
-        window.location = window.location.href;
+      success: (input) => {
+        SwimTeam.move(input);
+        console.log('Your team moved', input);
       }
+
     });
   };
   /////////////////////////////////////////////////////////////////////
@@ -24,13 +23,13 @@
   // Note: remember to fix the URL below.
   /////////////////////////////////////////////////////////////////////
 
-  const ajaxFileUplaod = (file) => { //this intentional?
+  const ajaxFileUpload = (file) => {
     var formData = new FormData();
     formData.append('file', file);
     $.ajax({
       type: 'POST',
       data: formData,
-      url: serverUrl,
+      url: serverUrl + '/background.jpg',
       cache: false,
       contentType: false,
       processData: false,
@@ -56,7 +55,8 @@
       return;
     }
 
-    ajaxFileUplaod(file);
+    console.log('file passed two checks', form.files);
+    ajaxFileUpload(file); //this needs to go somewhere
   });
 
 })();
