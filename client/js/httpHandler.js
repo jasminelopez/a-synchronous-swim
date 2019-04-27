@@ -1,23 +1,35 @@
 (function() {
 
-  const serverUrl = 'http://127.0.0.1:3000';
+  const serverUrl = 'http://127.0.0.1:8080';
 
-  //
-  // TODO: build the swim command fetcher here
-  // GY code
-  const ajaxGetRequest = () => { 
+  var input;
+
+  const ajaxGetRequest = (input) => { 
     $.ajax({
       type: 'GET',
       url: serverUrl,
-      cache: false,
-      contentType: 'text/plain',
+      //cache: false,
+      //contentType: 'text/plain',
       success: (input) => {
         SwimTeam.move(input);
-        console.log('Your team moved', input);
+        console.log('Your team moved with ajax', input);
       }
-
     });
   };
+
+  $('body').on('keydown', (event) => {
+    var arrowPress = event.key.match(/Arrow(Up|Down|Left|Right)/);
+    if (arrowPress) {
+      var direction = arrowPress[1];
+      SwimTeam.move(direction.toLowerCase());
+      input = direction.toLowerCase()
+      ajaxGetRequest(input);
+      console.log('Got to bottom of keydown');
+    }
+  });
+  
+  console.log('Client is running in the browser!');
+
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
   // Note: remember to fix the URL below.

@@ -14,5 +14,3 @@ server.listen(port, ip);
 
 console.log('Server is running in the terminal!');
 console.log(`Listening on http://${ip}:${port}`);
-
-

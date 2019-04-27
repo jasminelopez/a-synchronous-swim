@@ -54,17 +54,31 @@ module.exports = {
   });
 
   it('should respond with 200 to a GET request for a present background image', (done) => {
-    // write your test here
+    httpHandler.backgroundImageFile = path.join('.', 'spec', 'background.jpg');
+    let {req, res} = server.mock(httpHandler.backgroundImageFile , 'GET');
+
+    httpHandler.router(req, res, () => {
+      expect(res._responseCode).to.equal(200);
+      expect(res._ended).to.equal(true);
+      done();
+    });
+  });
+
+   it('should respond to a POST request to save a background image', (done) => {
+    let {req, res} = server.mock('/', 'POST');
+
+    httpHandler.router(req, res);
+    expect(res._responseCode).to.equal(200);
+    expect(res._ended).to.equal(true);
     done();
   });
 
-  xit('should respond to a POST request to save a background image', (done) => {
-    // write your test here
-    done();
-  });
+   it('should send back the previously saved image', (done) => {
+    let {req, res} = server.mock('/', '');
 
-  xit('should send back the previously saved image', (done) => {
-    // write your test here
+    httpHandler.router(req, res);
+    expect(res._responseCode).to.equal(200);
+    expect(res._ended).to.equal(true);
     done();
   });
 });
