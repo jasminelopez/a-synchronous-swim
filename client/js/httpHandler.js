@@ -4,20 +4,33 @@
 
   //
   // TODO: build the swim command fetcher here
-  //
-
+  // GY code
+  const ajaxGetRequest = () => { 
+    $.ajax({
+      type: 'GET',
+      data: '',
+      url: serverUrl, //needs to be somethign
+      cache: false,
+      contentType: 'text/plain',
+      processData: false,
+      success: () => { // return random comand??
+        // reload the page
+        window.location = window.location.href;
+      }
+    });
+  };
   /////////////////////////////////////////////////////////////////////
   // The ajax file uplaoder is provided for your convenience!
   // Note: remember to fix the URL below.
   /////////////////////////////////////////////////////////////////////
 
-  const ajaxFileUplaod = (file) => {
+  const ajaxFileUplaod = (file) => { //this intentional?
     var formData = new FormData();
     formData.append('file', file);
     $.ajax({
       type: 'POST',
       data: formData,
-      url: 'FILL_ME_IN',
+      url: serverUrl,
       cache: false,
       contentType: false,
       processData: false,
